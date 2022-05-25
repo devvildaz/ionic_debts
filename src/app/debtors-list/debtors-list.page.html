@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>debtorsList</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div nz-row style="padding: 1rem; padding-bottom: 0;">
+    <div nz-col nzSpan="4"></div>
+    <div nz-col nzSpan="16">
+      <button nz-button nzType="primary" style="width: 100%;" (click)="uploadFile()">
+        Crear nuevo deudor
+      </button>
+    </div>
+    <div nz-col nzSpan="4"></div>
+  </div>
+  <div nz-row style="padding: 1rem;">
+    <div nz-col nzSpan="4"></div>
+    <div nz-col nzSpan="16">
+      <button nz-button nzType="dashed" style="width: 100%;" 
+        (click)="openFileDialogSelector()">
+        Subir Archivo
+      </button>
+      <input #uploader type="file" id="uploader" hidden (change)="onChangeFileInput($event)">
+    </div>
+    <div nz-col nzSpan="4"></div>
+  </div>
+  <nz-divider nzText="Debts"></nz-divider>
+  <div>
+    <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
+
+      <app-debt-item *ngFor="let debtor of debtors" [debtor]="debtor"></app-debt-item>
+
+      <nz-list-empty *ngIf="debtors === null">
+        Ocurrio un error con la carga de la lista de deudores
+      </nz-list-empty>
+
+      <nz-list-empty *ngIf="debtors !== null && debtors.length === 0">
+        No tienes deudores registrados
+      </nz-list-empty>
+    </nz-list>
+  </div>
+</ion-content>
