@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
+import { NzIconModule } from 'ng-zorro-antd/icon';
+
 import { DebtorsListPageRoutingModule } from './debtors-list-routing.module';
 
 import { DebtorsListPage } from './debtors-list.page';
@@ -33,7 +35,8 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NzListModule,
     NzStatisticModule,
     NzModalModule,
-    NzAvatarModule
+    NzAvatarModule,
+    NzIconModule
   ],
   declarations: [DebtorsListPage, DebtItemComponent],
   exports: [DebtItemComponent]  

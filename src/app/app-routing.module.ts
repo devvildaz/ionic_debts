@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'debtors-list',
     loadChildren: () => import('./debtors-list/debtors-list.module').then( m => m.DebtorsListPageModule)
   },
+  {
+    path: 'debt-view',
+    loadChildren: () => import('./debt-view/debt-view.module').then( m => m.DebtViewPageModule)
+  },
 ];
 
 @NgModule({

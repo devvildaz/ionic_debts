@@ -6,22 +6,22 @@
 >
   <nz-list-item-meta-title>
     <div nz-row nzAlign='middle'>
-      <div nz-col [nzSpan]="12">
+      <div nz-col nzSpan="12">
         <span>{{ debtor.name }}</span>
       </div>
-      <div nz-col [nzSpan]="6">
+      <div nz-col nzSpan="6">
         <nz-statistic [nzValue]="(debtor.balance | number)!" [nzTitle]="'Balance (S/.)'"></nz-statistic>
       </div>
-      <div nz-col [nzSpan]="3">
-        <button nz-button  [nzSize]="small" 
+      <div nz-col nzSpan="3">
+        <button nz-button nzSize="medium" 
           nzShape="circle" nzType="default"
         >
           <i nz-icon nzType="download"></i>
         </button>
       </div>
-      <div nz-col [nzSpan]="3">
-        <button nz-button [nzSize]="small" nzShape="circle" 
-          nzType="default">
+      <div nz-col nzSpan="3">
+        <button nz-button nzSize="medium" nzShape="circle" 
+          nzType="primary">
           <i nz-icon nzType="download"></i>
         </button>
       </div>

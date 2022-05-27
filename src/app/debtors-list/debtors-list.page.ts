@@ -4,6 +4,8 @@ import { alertController } from '@ionic/core';
 import { Debtor } from '../debtor';
 import { DebtosServiceService } from '../debtos-service.service';
 
+
+
 @Component({
   selector: 'app-debtors-list',
   templateUrl: './debtors-list.page.html',
