@@ -14,9 +14,9 @@ import { DebtosServiceService } from '../debtos-service.service';
 })
 export class DebtorsListPage implements OnInit {
 
-  private debtors:Debtor[] = null;
-  private loading : boolean = true;
-  private open: boolean = false;
+  public debtors:Debtor[] = null;
+  public loading : boolean = true;
+  public open: boolean = false;
   validateForm!: FormGroup;
 
   @ViewChild('uploader') inputFile : ElementRef;

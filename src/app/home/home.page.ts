@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 
 @Component({
@@ -7,8 +8,17 @@ import { NgModule } from '@angular/core';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit{
 
-  constructor() {}
+  constructor(private navCtrl : NavController) {}
+
+  
+  ngOnInit() {
+    this.goToList();
+  }
+
+  goToList(){
+    this.navCtrl.navigateForward("/debtors-list");
+  }
 
 }

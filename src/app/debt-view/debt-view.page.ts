@@ -14,11 +14,11 @@ import { DebtosServiceService } from '../debtos-service.service';
 })
 export class DebtViewPage implements OnInit {
   validateForm!: FormGroup;
-  private debtor: Debtor = null;
-  private balances : DebtorBalance[] = null;
-  private loading : boolean = true;
-  private open: boolean = false;
-  private amount : number = 0.0;
+  public debtor: Debtor = null;
+  public  balances : DebtorBalance[] = null;
+  public loading : boolean = true;
+  public open: boolean = false;
+  public amount : number = 0.0;
 
 
   constructor(private debtorService : DebtosServiceService, private route: ActivatedRoute, private router: Router, public navCtrl: NavController, private fb: FormBuilder) {
