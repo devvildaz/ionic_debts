@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
-import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { DebtorsListPageRoutingModule } from './debtors-list-routing.module';
 
@@ -20,7 +18,8 @@ import { NzListModule } from "ng-zorro-antd/list";
 import { DebtItemComponent } from './debt-item/debt-item.component';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
-import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzFormModule } from 'ng-zorro-antd/form';
+
 
 
 @NgModule({
@@ -34,9 +33,10 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
     NzDividerModule,
     NzListModule,
     NzStatisticModule,
-    NzModalModule,
     NzAvatarModule,
-    NzIconModule
+    NzFormModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [DebtorsListPage, DebtItemComponent],
   exports: [DebtItemComponent]  

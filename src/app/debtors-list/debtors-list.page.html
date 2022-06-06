@@ -8,7 +8,7 @@
   <div nz-row style="padding: 1rem; padding-bottom: 0;">
     <div nz-col nzSpan="4"></div>
     <div nz-col nzSpan="16">
-      <button nz-button nzType="primary" style="width: 100%;">
+      <button nz-button nzType="primary" style="width: 100%;" (click)="switchOpen() ">
         Crear nuevo deudor
       </button>
     </div>
@@ -29,7 +29,7 @@
   <div>
     <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
 
-      <app-debt-item *ngFor="let debtor of debtors" [debtor]="debtor"></app-debt-item>
+      <app-debt-item *ngFor="let debtor of debtors" [debtor]="debtor" [debtors]="debtors" (deleteCallback)="deleteCallback($event)"></app-debt-item>
 
       <nz-list-empty *ngIf="debtors === null">
         Ocurrio un error con la carga de la lista de deudores
@@ -40,4 +40,39 @@
       </nz-list-empty>
     </nz-list>
   </div>
+
+  <ion-modal [isOpen]="open">
+    <ng-template>
+      <ion-content>
+        <div>
+          <button nz-button nzSize="small"  nzType="default" (click)="switchOpen()"
+        >
+          <ion-icon name="arrow-back"></ion-icon>
+        </button>
+        </div>
+        <div>Ingrese el nuevo cliente</div>
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Ingrese un valor correcto!!">
+              <nz-input-group nzPrefixIcon="cliente">
+                <input  type="string" formControlName="dni" nz-input placeholder="dni" />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Ingrese un valor correcto!!">
+              <nz-input-group nzPrefixIcon="cliente">
+                <input  type="string" formControlName="name" nz-input placeholder="nombre" />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control>
+              <button nz-button nzType="primary" [disabled]="!validateForm.valid">Entregar</button>
+            </nz-form-control>
+          </nz-form-item>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

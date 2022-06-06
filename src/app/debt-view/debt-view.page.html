@@ -1,17 +1,96 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>debtView</ion-title>
+    <ion-title>
+      <button nz-button nzSize="small" 
+        nzShape="circle" nzType="default"
+        (click)="goBack()"
+      >
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+      <span style="margin-left: 8px;">debtView</span>
+      <button nz-button nzSize="small" 
+        nzShape="circle" nzType="default"
+        (click)="switchOpen()"
+      >
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  
-  <div nz-row nzJustify="center" nzAlign="middle" style="margin: 16px 0px;">
-    <div nz-col nzSpan="16">
-      Diego Percy Vilca Daza
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="debtor !== null" nz-row nzJustify="center" nzAlign="middle" style="margin: 16px 0px;">
+    <div nz-col nzSpan="14">
+      {{ debtor.name }}
     </div>
-    <div nz-col nzSpan="6">
-      <nz-statistic [nzValue]="(1000 | number)!" [nzTitle]="'Balance (S/.)'"></nz-statistic>
+    <div nz-col nzSpan="8">
+      <nz-statistic [nzValue]="(debtor.balance | number)!" [nzTitle]="'Balance'" [nzPrefix]="'S/.'"></nz-statistic>
     </div>
   </div>
+  <nz-divider style="margin: 8px;"></nz-divider>
+    <div style="padding-left: 8px;">
+      Lista de transacciones.
+    </div>
+  <nz-divider style="margin: 8px;"></nz-divider>
+  <div>
+    <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
+      <nz-list-item *ngFor="let balance of balances" nz-row nzJustify="center" nzAlign="middle">
+        <div nz-col nzSpan="1"></div>
+        <div nz-col nzSpan="10">
+          <nz-statistic 
+            [nzValue]="(balance.amount | number)!" 
+            [nzPrefix]="'S/.'"
+            [nzValueStyle]="{ color: balance.amount < 0 ? '#CF1322':'#3F8600' }"
+          >
+          </nz-statistic>
+        </div>
+        <div nz-col nzSpan="10">
+          <div>Fecha: {{ convertDate(balance.created_at) }}</div>
+        </div>
+        <div nz-col nzSpan="1"></div>
+      </nz-list-item>
+      
+
+      <nz-list-empty *ngIf="balances === null">
+        Ocurrio un error con la carga del flujo historico
+      </nz-list-empty>
+
+      <nz-list-empty *ngIf="balances !== null && balances.length === 0">
+        No se hizo alguna transaccion
+      </nz-list-empty>
+    </nz-list>
+  </div>
+
+  <ion-modal [isOpen]="open">
+    <ng-template>
+      <ion-content>
+        <div>
+          <button nz-button nzSize="small"  nzType="default" (click)="switchOpen()"
+        >
+          <ion-icon name="arrow-back"></ion-icon>
+        </button>
+        </div>
+        <div>Ingrese el valor de la transeferencia de {{ debtor.name }}</div>
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Ingrese un valor correcto!!">
+              <nz-input-group nzPrefixIcon="amount">
+                <input  type="number" formControlName="amount" nz-input placeholder="Monto" />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control>
+              <button nz-button nzType="primary" [disabled]="!validateForm.valid">Log in</button>
+            </nz-form-control>
+          </nz-form-item>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
+
+

@@ -10,19 +10,21 @@
         <span>{{ debtor.name }}</span>
       </div>
       <div nz-col nzSpan="6">
-        <nz-statistic [nzValue]="(debtor.balance | number)!" [nzTitle]="'Balance (S/.)'"></nz-statistic>
+        <nz-statistic [nzValue]="(debtor.balance | number)!" [nzTitle]="'Balance (S/.)'" 
+        [nzValueStyle]="{ color: debtor.balance < 0 ? '#CF1322':'#3F8600' }"></nz-statistic>
       </div>
       <div nz-col nzSpan="3">
         <button nz-button nzSize="medium" 
           nzShape="circle" nzType="default"
+          (click)="goToViewPage()"
         >
-          <i nz-icon nzType="download"></i>
+          <ion-icon name="eye"></ion-icon>
         </button>
       </div>
       <div nz-col nzSpan="3">
         <button nz-button nzSize="medium" nzShape="circle" 
-          nzType="primary">
-          <i nz-icon nzType="download"></i>
+          nzType="primary" (click)="deleteClient()">
+          <ion-icon name="trash"></ion-icon>
         </button>
       </div>
     </div>
